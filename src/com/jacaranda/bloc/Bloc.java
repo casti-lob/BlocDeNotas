@@ -17,16 +17,16 @@ public class Bloc {
 		super();
 		this.nombre = nombre;
 		this.numNotas=0;
-		this.blocNotas= new NotaAlarma[NUMERO_NOTAS_MAXIMA];
-		//pendiente blocNotas
+		this.blocNotas= new Nota[NUMERO_NOTAS_MAXIMA];
+		
 	}
 	public String getBlocNotas(int indice) {
-		String copia = blocNotas[indice].getTexto();
-		return copia;
+		
+		return blocNotas[indice].toString();
 	}
 	//actualizar un texto de una nota existente
 	public void updateNota(int numero, String texto) throws BlocException {
-		if(numero>this.numNotas) {
+		if(numero>=this.numNotas) {
 			throw new BlocException("Nota no existente");
 		}else {
 			blocNotas[numero].setTexto(texto);
@@ -81,11 +81,9 @@ public class Bloc {
 		Arrays.sort(blocNotas);
 		String notas="";
 		for(int i=0 ;i<this.numNotas;i++) {
-			notas+=blocNotas[i].getTexto()+", ";
+			notas+=blocNotas[i]+", ";
 		}
 		return notas;
 	}
-	
-	
 
 }

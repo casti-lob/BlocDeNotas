@@ -3,7 +3,7 @@ package com.jacaranda.notas;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Nota {
+public class Nota implements Comparable<Nota> {
 	private static int codigoSiguiente=1;
 	private int codigo;
 	protected String texto;
@@ -42,7 +42,7 @@ public class Nota {
 		return fechaUltimaModificacion;
 	}
 	
-	//Si la fecha de creacion es igual a la de modificación el resultad
+	//Si la fecha de creacion es igual a la de modificaciï¿½n el resultad
 	//es false
 	public boolean isModificado() {
 		boolean modificado = true;
@@ -62,17 +62,18 @@ public class Nota {
 		return empty;
 	}
 	
-	public boolean isCreadoAnterior(String nota) {
-		boolean resultado=false;//por defecto la nota esta creada anterior mente
-		if(isEmpty()==true) {
-			resultado=true;
+	public boolean isCreadoAnterior(Nota other) {
+		boolean resultado=false;
+		if(other.fechaCreacion.isBefore(this.fechaCreacion)) {
+			resultado= true;
 		}
 		return resultado;
 	}
 	
-	public boolean isModificadoAnterior(String nota) {
-		boolean resultado=false;//por defecto la nota esta creada anterior mente
-		if(isEmpty()==true&&isModificado()==false) {
+	public boolean isModificadoAnterior(Nota other) {
+		boolean resultado=false;
+		if(other.fechaUltimaModificacion.isBefore(this.fechaUltimaModificacion)) {
+			
 			resultado=true;
 		}
 		return resultado;
@@ -94,16 +95,18 @@ public class Nota {
 		Nota other = (Nota) obj;
 		return Objects.equals(fechaCreacion, other.fechaCreacion) && Objects.equals(texto, other.texto);
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Nota [codigo=" + codigo + ", texto=" + texto + ", fechaCreacion=" + fechaCreacion
 				+ ", fechaUltimaModificacion=" + fechaUltimaModificacion + "]";
 	}
-	/*
-	 * Pendiente
-	public int compareTo(String nota) {
+
+	@Override
+	public int compareTo(Nota o) {
+		int resultado= this.codigo-o.codigo;
 		
+			
+		return resultado;
 	}
-	*/
 }

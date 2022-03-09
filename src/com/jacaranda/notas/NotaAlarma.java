@@ -54,10 +54,8 @@ public class NotaAlarma extends Nota implements Activable {
 
 	@Override
 	public String toString() {
-		return "NotaAlarma [texto "+texto+" fechaAlarma=" + fechaAlarma + ", minutosRepetir=" + minutosRepetir + ", activado="
-				+ activado + "]";
+		return super.toString()+"Fecha alarma"+this.fechaAlarma+" alarma activada " +this.activado;
 	}
-	
 	
 	
 	
