@@ -17,7 +17,7 @@ public class Nota implements Comparable<Nota> {
 		this.codigo= codigoSiguiente++;
 		//pendiente fcreacion y fmodifi
 		this.fechaCreacion = LocalDateTime.now();
-		this.fechaUltimaModificacion= this.fechaCreacion;
+		this.fechaUltimaModificacion= this.fechaCreacion; // lo igualamos ya que si ponemos .now nos da una diferencia de segundos
 		
 	}
 
@@ -64,7 +64,7 @@ public class Nota implements Comparable<Nota> {
 	
 	public boolean isCreadoAnterior(Nota other) {
 		boolean resultado=false;
-		if(other.fechaCreacion.isBefore(this.fechaCreacion)) {
+		if(other.fechaCreacion.isBefore(this.fechaCreacion)) {//comparamos si un objeto nota es anterior a la creacion que otro objeto nota
 			resultado= true;
 		}
 		return resultado;
@@ -72,7 +72,7 @@ public class Nota implements Comparable<Nota> {
 	
 	public boolean isModificadoAnterior(Nota other) {
 		boolean resultado=false;
-		if(other.fechaUltimaModificacion.isBefore(this.fechaUltimaModificacion)) {
+		if(other.fechaUltimaModificacion.isBefore(this.fechaUltimaModificacion)) {//comparamos si un objeto nota es anterior a la modificacion de otro objeto nota
 			
 			resultado=true;
 		}
@@ -104,7 +104,7 @@ public class Nota implements Comparable<Nota> {
 
 	@Override
 	public int compareTo(Nota o) {
-		int resultado= this.codigo-o.codigo;
+		int resultado= this.codigo-o.codigo; //ordenamos por codigo 
 		
 			
 		return resultado;

@@ -33,24 +33,37 @@ public class Bloc {
 		}
 		
 	}
-	/*
-	 * Por hacer
-	public void activa(int numero) {
-		if(numero>this.numNotas) {
-			throw new BlocException("Nota no existente");
+	
+	public void activa(int numero) throws BlocException {
+		numero-=1;//se le resta 1 para poder indicar el indice del array
+		if(numero>this.numNotas|| numero <0) { //comprobamos que los rangos son correctos
+			throw new BlocException("La nota no existe");
+		}else if (blocNotas[numero]instanceof NotaAlarma) {//comprobamos si el objeto esta instanciado a notaAlarma
+			if(((NotaAlarma)blocNotas[numero]).isActivado()==true) {
+				throw new BlocException("La nota ya esta activada");
+			}
+			((NotaAlarma)blocNotas[numero]).activar(); //activamos la alarma
 		}else {
-			blocNotas[numero]
+			throw new BlocException("La nota no tiene alarma");//Salta cuando la nota no esta instanciada a notaAlarma
 		}
+			
 	}
-	public void desactiva(int numero){
-	if(numero>this.numNotas) {
-			throw new BlocException("Nota no existente");
+	
+	public void desactiva(int numero) throws BlocException{
+		numero-=1;//se le resta 1 para poder indicar el indice del array
+		if(numero>this.numNotas|| numero <0) {//comprobamos que los rangos son correctos
+			throw new BlocException("La nota no existe");
+		}else if(blocNotas[numero]instanceof NotaAlarma) {//comprobamos si el objeto esta instanciado a notaAlarma
+			if(((NotaAlarma)blocNotas[numero]).isActivado()==false) {
+				throw new BlocException("La nota ya esta desactivada");
+			}
+			((NotaAlarma)blocNotas[numero]).desactivar();//desactivamos la alarma
 		}else {
-			blocNotas[numero]
+			throw new BlocException("La nota no tiene alarma");//Salta cuando la nota no esta instanciada a notaAlarma
 		}
 	}
 	
-	*/
+	
 	
 	public static int getNumeroNotasMaxima() {
 		return NUMERO_NOTAS_MAXIMA;
@@ -78,12 +91,10 @@ public class Bloc {
 	
 	
 	public String ordena() {
-		Arrays.sort(blocNotas);
-		String notas="";
-		for(int i=0 ;i<this.numNotas;i++) {
-			notas+=blocNotas[i]+", ";
-		}
-		return notas;
+		Nota notasOrdenadas[]= new Nota[this.numNotas];
+		Arrays.sort(notasOrdenadas);
+		
+		return notasOrdenadas.toString();
 	}
 
 }
